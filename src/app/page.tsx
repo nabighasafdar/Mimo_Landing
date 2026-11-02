@@ -270,6 +270,7 @@ export default function Home() {
             <a href="#install">Install</a>
             <a href="#faq">FAQ</a>
             <a href="/privacy">Privacy</a>
+            <a href="/delete-account">Delete account</a>
           </nav>
           <div style={{fontSize: 13, fontWeight: 800, color: '#3B2A1F'}}>© {new Date().getFullYear()} Mimo</div>
         </div>

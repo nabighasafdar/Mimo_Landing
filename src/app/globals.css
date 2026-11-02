@@ -198,6 +198,8 @@ details p { margin: 0 0 20px; font-size: 15.5px; line-height: 1.6; color: var(--
   font: 700 16px var(--sans); color: var(--ink);
 }
 .form input:focus-visible { outline: 3px solid var(--clay); outline-offset: 1px; }
+.form .form-check { flex-direction: row; align-items: center; gap: 10px; }
+.form .form-check input { width: 20px; height: 20px; padding: 0; accent-color: var(--clay); }
 .form-error { margin: 0; color: #9a3524; font-weight: 800; font-size: 14.5px; }
 
 @media (max-width: 760px) {

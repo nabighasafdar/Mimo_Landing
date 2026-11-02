@@ -1,19 +1,12 @@
 import type {Metadata} from 'next';
 import Link from 'next/link';
-import {site} from '@/site';
 
 export const metadata: Metadata = {
   title: 'Privacy policy – Mimo',
   description: 'What Mimo collects, where it goes and how to delete it.',
 };
 
-function Contact() {
-  return site.supportEmail ? (
-    <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>
-  ) : (
-    <>[support email]</>
-  );
-}
+const ISSUES_URL = 'https://github.com/nabighasafdar/Mimo/issues';
 
 export default function Privacy() {
   return (
@@ -22,61 +15,66 @@ export default function Privacy() {
       <main className="doc">
         <Link className="doc-back" href="/">← Back to Mimo</Link>
         <h1>Privacy policy</h1>
-        <p className="doc-date">Last updated 30 October 2026</p>
+        <p className="doc-date">Last updated 2 November 2026</p>
 
         <p>
-          Mimo is a personal budgeting app. This page explains what it collects, who handles that
-          information and how you can delete it.
+          Mimo helps you track your spending. This page explains what the app collects, why, and
+          what you can do about it.
         </p>
 
-        <h2>What Mimo collects</h2>
+        <h2>What Mimo stores</h2>
         <ul>
-          <li><b>Your account:</b> your email address and password. Passwords are stored encrypted.</li>
-          <li><b>Your profile:</b> name, age, income type and amount, currency and savings goal.</li>
-          <li><b>Your spending:</b> each expense&apos;s name, amount, category and date, including the text of what you said for voice entries.</li>
-          <li><b>Your bucket list:</b> the goals you add and how much you&apos;ve saved towards them.</li>
-          <li><b>Usage counts:</b> how many AI reads you made each day, so we can apply the daily limit.</li>
+          <li><b>Account:</b> your email address and password, or your Google sign-in. Passwords are stored only in hashed form.</li>
+          <li><b>Profile:</b> the name, age, income type, income, currency and savings goal you enter.</li>
+          <li><b>Budget:</b> your expenses (amount, category, note, date, and the words you said when you logged one by voice) and your savings goals.</li>
+          <li><b>Usage:</b> how many AI reads you made each day, used to apply the daily limit.</li>
         </ul>
 
-        <h2>Receipt photos and voice</h2>
+        <h2>What Mimo does not do</h2>
+        <p>Mimo has no ads and no analytics, does not sell your data, and does not connect to your bank.</p>
+
+        <h2>Other services that handle your data</h2>
+        <ul>
+          <li><b>Supabase</b> hosts your account and budget. Its servers are in Singapore, so your data is processed outside your country if you live elsewhere.</li>
+          <li><b>Google Gemini</b> reads the receipt photos and spending text you send to Mimo&apos;s AI. Mimo does not keep the photos, but they are processed by Google under its terms. Please avoid scanning documents with information you would not want processed this way.</li>
+          <li><b>Your phone&apos;s speech recognition</b> turns your voice into text. On most Android phones this is provided by Google. Mimo receives the text, not a recording.</li>
+          <li><b>Google Sign-In</b> shares your name and email with Mimo if you choose to use it.</li>
+        </ul>
+
+        <h2>Stored on your phone</h2>
         <p>
-          When you scan a receipt, the photo is sent to Google&apos;s Gemini AI through our server to
-          read the items. When you tell Mimo what you spent, your phone&apos;s speech recognition
-          turns your voice into text, and that text is sent to Gemini the same way. Mimo does not
-          save your receipt photos or voice recordings, only the expenses you choose to add.
-        </p>
-        <p>
-          Don&apos;t scan documents that show card numbers or other details you wouldn&apos;t want
-          shared. Google handles what it receives under its own Gemini API terms.
+          Mimo keeps a copy of your budget and any changes waiting to be sent, so it can work
+          without internet. The copy is removed when you log out. Changes not yet sent stay until
+          you next log in.
         </p>
 
-        <h2>Who handles your data</h2>
-        <ul>
-          <li><b>Supabase</b> hosts the database and login system.</li>
-          <li><b>Google</b> provides Gemini (AI reading) and, on most Android phones, speech recognition.</li>
-        </ul>
-        <p>Mimo has no ads, and we don&apos;t sell your information.</p>
+        <h2>Permissions</h2>
+        <p>
+          The microphone is used only while you log an expense by voice. The camera and photos are
+          used only when you scan a receipt.
+        </p>
 
         <h2>Keeping and deleting your data</h2>
         <p>
-          Your data is kept while you have an account, so it&apos;s there whenever you log in. You can
-          delete any expense or goal in the app. To delete your whole account and everything in it,
-          email <Contact /> from your account&apos;s email address.
-        </p>
-
-        <h2>Your data on your phone</h2>
-        <p>
-          The app stores your login session and your alert and tip settings on your phone. It asks
-          for the camera and microphone only when you use those features, and you can turn them off
-          in Android settings.
+          Your data stays until you delete your account. You can do that any time in the app under{' '}
+          <b>Me → Delete account</b>, or on the <Link href="/delete-account">delete account page</Link>.
+          It removes your account, profile, expenses, goals and usage record for good. You can view
+          and correct your details in the app at any time.
         </p>
 
         <h2>Children</h2>
-        <p>Mimo isn&apos;t meant for children under 13, and we don&apos;t knowingly collect their data.</p>
-
-        <h2>Changes and contact</h2>
         <p>
-          If this policy changes, we&apos;ll update this page and the date at the top. Questions? Email <Contact />.
+          Children should use Mimo with a parent or guardian&apos;s permission. If you believe a child
+          has given us data without permission, contact us and we will delete it.
+        </p>
+
+        <h2>Changes</h2>
+        <p>If this policy changes, the new version will be published here with a new date.</p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions or requests can be raised on <a href={ISSUES_URL}>GitHub Issues</a>. Issues are
+          public, so please do not include personal or financial details.
         </p>
       </main>
     </div>

@@ -9,8 +9,6 @@ export const site = {
   version: process.env.NEXT_PUBLIC_APK_VERSION || '1.0',
   /** e.g. "48 MB"; shown next to the version when set. */
   apkSize: process.env.NEXT_PUBLIC_APK_SIZE || '',
-  /** Shown on the privacy page. */
-  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || '',
   // Public values, the same ones shipped in the app; row level security protects the data.
   supabaseUrl: 'https://ybvuqihcidyhufrqicgb.supabase.co',
   supabasePublishableKey: 'sb_publishable_f3AFQiH830CIkZ1iRhg04g_M690cOlU',
