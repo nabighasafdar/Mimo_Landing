@@ -1,16 +1,20 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import {useSyncExternalStore} from 'react';
 
 type OS = 'android' | 'ios' | 'other';
 
+// The user agent never changes, so there is nothing to subscribe to.
+const subscribe = () => () => {};
+
+function detectOS(): OS {
+  const ua = navigator.userAgent;
+  return /android/i.test(ua) ? 'android' : /iphone|ipad|ipod/i.test(ua) ? 'ios' : 'other';
+}
+
+/** null while prerendering on the server, the visitor's OS once in the browser. */
 function useOS(): OS | null {
-  const [os, setOS] = useState<OS | null>(null);
-  useEffect(() => {
-    const ua = navigator.userAgent;
-    setOS(/android/i.test(ua) ? 'android' : /iphone|ipad|ipod/i.test(ua) ? 'ios' : 'other');
-  }, []);
-  return os;
+  return useSyncExternalStore(subscribe, detectOS, () => null);
 }
 
 /** The hero button's label: iPhone visitors are told it's the Android file. */
