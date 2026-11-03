@@ -19,9 +19,9 @@ function Phone({src, alt, style}: {src: string; alt: string; style?: CSSProperti
   );
 }
 
-/** A decorative scrapbook sticker, positioned absolutely by `style`. */
-function Sticker({src, w, h, style, alt = ''}: {src: string; w: number; h: number; style: CSSProperties; alt?: string}) {
-  return <Image className="stk" src={src} alt={alt} width={w} height={h} style={{width: w, height: h, ...style}} />;
+/** A decorative scrapbook sticker, positioned absolutely by `style`. `className` can hide or shrink it on phones. */
+function Sticker({src, w, h, style, alt = '', className = ''}: {src: string; w: number; h: number; style: CSSProperties; alt?: string; className?: string}) {
+  return <Image className={`stk ${className}`} src={src} alt={alt} width={w} height={h} style={{width: w, height: h, ...style}} />;
 }
 
 function DownloadIcon({size = 18}: {size?: number}) {
@@ -86,10 +86,10 @@ export default function Home() {
         <div className="hero-art">
           <div className="burlap hero-burlap" />
           <Phone src="/screens/home.png" alt="Mimo's home screen: money left to spend this month and a list of what you bought" style={{marginTop: 26, transform: 'rotate(2deg)'}} />
-          <Sticker src="/art/bunny.png" alt="Mimo the bunny" w={118} h={250} style={{left: '2%', bottom: 10}} />
-          <Sticker src="/art/sticker-hero-top.png" w={96} h={99} style={{right: '4%', top: 0, transform: 'rotate(16deg)'}} />
-          <Sticker src="/art/sticker-hero-bottom.png" w={140} h={203} style={{right: 0, bottom: 0, transform: 'rotate(12deg)'}} />
-          <Sticker src="/art/seal.png" w={78} h={78} style={{left: '10%', top: 40, transform: 'rotate(-14deg)'}} />
+          <Sticker src="/art/bunny.png" alt="Mimo the bunny" w={118} h={250} style={{left: '2%', bottom: 10}} className="stk-bunny" />
+          <Sticker src="/art/sticker-hero-top.png" w={96} h={99} style={{right: '4%', top: 0, transform: 'rotate(16deg)'}} className="stk-small" />
+          <Sticker src="/art/sticker-hero-bottom.png" w={140} h={203} style={{right: 0, bottom: 0, transform: 'rotate(12deg)'}} className="stk-small" />
+          <Sticker src="/art/seal.png" w={78} h={78} style={{left: '10%', top: 40, transform: 'rotate(-14deg)'}} className="hide-sm" />
         </div>
       </section>
 
@@ -99,8 +99,8 @@ export default function Home() {
           <div className="center">
             <div className="kicker">what Mimo does</div>
             <h2 className="h2" style={{marginTop: 6}}>Budgeting that feels like journaling</h2>
-            <Sticker src="/art/deco-features-left.png" w={46} h={128} style={{left: '6%', top: -20, transform: 'rotate(-16deg)'}} />
-            <Sticker src="/art/deco-features-right.png" w={52} h={128} style={{right: '6%', top: -26, transform: 'rotate(14deg)'}} />
+            <Sticker src="/art/deco-features-left.png" w={46} h={128} style={{left: '6%', top: -20, transform: 'rotate(-16deg)'}} className="hide-sm" />
+            <Sticker src="/art/deco-features-right.png" w={52} h={128} style={{right: '6%', top: -26, transform: 'rotate(14deg)'}} className="hide-sm" />
           </div>
           <div className="feat-grid">
             <article className="feat">
@@ -136,17 +136,17 @@ export default function Home() {
       </section>
       <div className="scal-s flip" />
 
-      <section className="wrap" style={{paddingTop: 88, paddingBottom: 96}}>
+      <section className="wrap sec">
         <div className="center">
           <div className="kicker">a peek inside</div>
           <h2 className="h2" style={{marginTop: 6}}>Every page is a little scrapbook</h2>
         </div>
-        <div className="peek">
+        <div className="peek" aria-label="App screenshots">
           <Phone src="/screens/voice.png" alt="Telling Mimo what you spent by voice" style={{transform: 'rotate(-3deg)'}} />
           <Phone src="/screens/goals.png" alt="The bucket list with savings goals" style={{transform: 'translateY(-24px)'}} />
           <Phone src="/screens/stats.png" alt="Monthly spending stats with a ring chart" style={{transform: 'rotate(3deg)'}} />
-          <Sticker src="/art/deco-peek-left.png" w={96} h={168} style={{left: 0, bottom: -40, transform: 'rotate(-14deg)'}} />
-          <Sticker src="/art/deco-peek-right.png" w={130} h={161} style={{right: 0, top: -40, transform: 'rotate(12deg)'}} />
+          <Sticker src="/art/deco-peek-left.png" w={96} h={168} style={{left: 0, bottom: -40, transform: 'rotate(-14deg)'}} className="hide-sm" />
+          <Sticker src="/art/deco-peek-right.png" w={130} h={161} style={{right: 0, top: -40, transform: 'rotate(12deg)'}} className="hide-sm" />
         </div>
       </section>
 
@@ -189,7 +189,7 @@ export default function Home() {
       </section>
       <div className="scal-b flip" />
 
-      <section id="download" className="wrap" style={{paddingTop: 88, paddingBottom: 88}}>
+      <section id="download" className="wrap sec">
         <div className="center">
           <div className="kicker">pick your phone</div>
           <h2 className="h2" style={{marginTop: 6}}>Download Mimo</h2>
@@ -211,7 +211,7 @@ export default function Home() {
             ) : (
               <button className="btn btn-g" disabled style={{marginTop: 6, cursor: 'not-allowed'}}>Coming soon</button>
             )}
-            <p className="hand">On a laptop? Open this page on your Android phone instead.</p>
+            <p className="hand hide-sm">On a laptop? Open this page on your Android phone instead.</p>
           </div>
           <div className="plat off">
             <div className="plat-head">
@@ -225,13 +225,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="faq" className="wrap" style={{paddingBottom: 104, position: 'relative'}}>
+      <section id="faq" className="wrap sec-faq">
         <div className="center">
           <h2 className="h2">Questions</h2>
         </div>
         <div className="faq">
-          <Sticker src="/art/deco-faq-left.png" w={80} h={114} style={{left: -110, top: 10, transform: 'rotate(-10deg)'}} />
-          <Sticker src="/art/deco-faq-right.png" w={90} h={126} style={{right: -110, bottom: 0, transform: 'rotate(12deg)'}} />
+          <Sticker src="/art/deco-faq-left.png" w={80} h={114} style={{left: -110, top: 10, transform: 'rotate(-10deg)'}} className="hide-sm" />
+          <Sticker src="/art/deco-faq-right.png" w={90} h={126} style={{right: -110, bottom: 0, transform: 'rotate(12deg)'}} className="hide-sm" />
           <details open>
             <summary>Why isn&apos;t Mimo on the Play Store?</summary>
             <p>Not yet! For now you can download the app straight from this page. When Mimo arrives on the Play Store, we&apos;ll link it here.</p>
